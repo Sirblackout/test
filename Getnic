@@ -1,18 +1,23 @@
-# Load your CVM list
-$cvmList = Get-Content .\cvm_list.txt
-$user = "nutanix" # Change if your user is different
+# Change these as needed
+$user = "nutanix"
 $outputFile = ".\all_clusters_nics.txt"
 
-# Clear previous output
+# Clear output file
 if (Test-Path $outputFile) { Remove-Item $outputFile }
 
+# Read CVM list
+$cvmList = Get-Content .\cvm_list.txt
+
 foreach ($cvm in $cvmList) {
+    Write-Host "Connecting to $cvm"
     Add-Content $outputFile "======== $cvm ========"
-    # Run the SSH command and append output
-    $result = ssh $user@$cvm "hostssh 'lspci | grep -i ethernet'"
-    Add-Content $outputFile $result
+    try {
+        # -o StrictHostKeyChecking=no skips unknown host key prompts (remove if you want)
+        $result = & ssh -o StrictHostKeyChecking=no "$user@$cvm" "hostssh 'lspci | grep -i ethernet'"
+        Add-Content $outputFile $result
+    } catch {
+        Add-Content $outputFile "ERROR: $_"
+    }
     Add-Content $outputFile ""
 }
-Write-Host "Done. See $outputFile"
-
-
+Write-Host "Done. Output saved to $outputFile"

@@ -32,3 +32,13 @@ At C:\Users\NBJNAB9\Downloads\Get-nic\get-ahvnic.ps1:16 char:19
     + FullyQualifiedErrorId : NativeCommandError
  
 Nutanix AHV
+
+
+ssh : Nutanix AHV
+At line:1 char:1
++ ssh nutanix@10.142.10.139
++ ~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Nutanix AHV:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+

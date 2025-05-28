@@ -21,3 +21,14 @@ foreach ($cvm in $cvmList) {
     Add-Content $outputFile ""
 }
 Write-Host "Done. Output saved to $outputFile"
+
+
+
+ssh.exe : Warning: Permanently added '10.142.10.139' (ECDSA) to the list of known hosts.
+At C:\Users\NBJNAB9\Downloads\Get-nic\get-ahvnic.ps1:16 char:19
++ ...   $result = & ssh -o StrictHostKeyChecking=no "$user@$cvm" "hostssh ' ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: Perman...of known hosts.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Nutanix AHV

@@ -1,8 +1,4 @@
-@echo off
-set user=admin
-for /f %%i in (cvm_list.txt) do (
-    echo ====== %%i ======
-    plink.exe -ssh %user%@%%i "hostssh 'lspci | grep -i ethernet'"
-    echo.
-)
-pause
+hostssh 'for iface in eth2 eth4; do \
+echo -n "$(hostname -s) $iface: "; \
+ethtool -m $iface 2>/dev/null | grep -E "Vendor (name|PN)"; \
+done'
